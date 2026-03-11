@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
-import { useAuth, SignInButton, UserButton } from "@clerk/clerk-react";
+import { useAuth, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import SkillMentorLogo from "@/assets/logo.webp";
 import { Menu } from "lucide-react";
 import { useState } from "react";
@@ -9,7 +9,10 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 export function Navigation() {
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
+
+  const isAdmin = user?.publicMetadata?.role === "admin";
 
   const NavItems = ({ mobile = false }: { mobile?: boolean }) => (
     <nav
@@ -39,6 +42,17 @@ export function Navigation() {
       >
         Resources
       </Link>
+
+      {isSignedIn && isAdmin && (
+        <Link
+          to="/admin"
+          className="hover:text-primary transition-colors"
+          onClick={() => mobile && setIsOpen(false)}
+        >
+          Admin
+        </Link>
+      )}
+
     </nav>
   );
 
@@ -60,6 +74,19 @@ export function Navigation() {
               Dashboard
             </Button>
           </Link>
+
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className={cn(mobile && "w-full")}
+              onClick={() => mobile && setIsOpen(false)}
+            >
+              <Button variant="ghost" className={cn(mobile && "w-full")}>
+                Admin
+              </Button>
+            </Link>
+          )}
+
           <div
             className={cn(
               "flex items-center",
@@ -140,6 +167,7 @@ export function Navigation() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
+            
             <SheetContent
               side="right"
               className="w-[300px] bg-black text-white p-6"

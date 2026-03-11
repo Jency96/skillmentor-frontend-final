@@ -12,17 +12,18 @@ export interface Mentor {
   mentorId: string;
   firstName: string;
   lastName: string;
-  email: string;
-  title: string;
-  profession: string;
-  company: string;
-  experienceYears: number;
-  bio: string;
-  profileImageUrl: string;
+  email?: string;
+  phoneNumber?: string;
+  title?: string;
+  profession?: string;
+  company?: string;
+  experienceYears?: number;
+  bio?: string;
+  profileImageUrl?: string;
   positiveReviews: number;
   totalEnrollments: number;
   isCertified: boolean;
-  startYear: string;
+  startYear?: number;
   subjects: Subject[];
 }
 

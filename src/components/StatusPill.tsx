@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface StatusPillProps {
-  status: "pending" | "accepted" | "completed" | "cancelled";
+  status: "pending" | "accepted" | "completed" | "cancelled" | "confirmed";
 }
 
 export function StatusPill({ status }: StatusPillProps) {

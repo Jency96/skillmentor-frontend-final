@@ -3,8 +3,9 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { CalendarDays } from "lucide-react";
 import { StatusPill } from "@/components/StatusPill";
 import { getMyEnrollments } from "@/lib/api";
-import type { Enrollment } from "@/types";
+
 import { useNavigate } from "react-router";
+import type { Enrollment } from "@/types";
 
 export default function DashboardPage() {
   const { isLoaded, isSignedIn, getToken } = useAuth();

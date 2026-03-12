@@ -79,6 +79,11 @@ export async function getMentors(
   return res.json();
 }
 
+export async function getSubjects(token: string): Promise<Subject[]> {
+  const res = await fetchWithAuth("/api/v1/subjects", token);
+  return res.json();
+}
+
 export async function createSubject(
   token: string,
   data: {
@@ -112,7 +117,7 @@ export async function createMentor(
     startYear?: number;
   },
 
-  ): Promise<Mentor> {
+): Promise<Mentor> {
   const res = await fetchWithAuth("/api/v1/mentors", token, {
     method: "POST",
     body: JSON.stringify(data),
@@ -132,7 +137,7 @@ export async function getAllBookings(
     sort?: string;
   },
 
-  ): Promise<PaginatedResponse<Enrollment>> {
+): Promise<PaginatedResponse<Enrollment>> {
   const query = new URLSearchParams();
   if (params?.page !== undefined) query.set("page", String(params.page));
   if (params?.size !== undefined) query.set("size", String(params.size));

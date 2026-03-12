@@ -1,10 +1,11 @@
-import { LayoutDashboard, BookOpen, Users, CalendarCheck2 } from "lucide-react";
+import { LayoutDashboard, BookOpen, Users, CalendarCheck2, PlusCircle } from "lucide-react";
 import { NavLink } from "react-router";
 import { cn } from "@/lib/utils";
 
 const items = [
     { to: "/admin", label: "Overview", icon: LayoutDashboard },
-    { to: "/admin/subjects/create", label: "Create Subject", icon: BookOpen },
+    { to: "/admin/subjects", label: "Subjects", icon: BookOpen },
+    { to: "/admin/subjects/create", label: "Create Subject", icon: PlusCircle  },
     { to: "/admin/mentors/create", label: "Create Mentor", icon: Users },
     { to: "/admin/bookings", label: "Manage Bookings", icon: CalendarCheck2 },
 ];

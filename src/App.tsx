@@ -10,6 +10,7 @@ import ManageBookingsPage from "./pages/admin/ManageBookingsPage";
 import CreateMentorPage from "./pages/admin/CreateMentorPage";
 import CreateSubjectPage from "./pages/admin/CreateSubjectPage";
 import AdminOverviewPage from "./pages/admin/AdminOverviewPage";
+import SubjectsPage from "./pages/admin/SubjectsPage";
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
             <Route path="subjects/create" element={<CreateSubjectPage />} />
             <Route path="mentors/create" element={<CreateMentorPage />} />
             <Route path="bookings" element={<ManageBookingsPage />} />
+            <Route path="subjects" element={<SubjectsPage />} />
           </Route>
 
           <Route path="*" element={<LoginPage />} />

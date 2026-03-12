@@ -72,7 +72,7 @@ export default function CreateMentorPage() {
       title: "",
       profession: "",
       company: "",
-      experienceYears: 0,
+      experienceYears: undefined,
       bio: "",
       profileImageUrl: "",
       isCertified: false,
@@ -354,7 +354,7 @@ export default function CreateMentorPage() {
                     <FormLabel>Bio</FormLabel>
                     <FormControl>
                       <Textarea
-                        className="min-h-[140px]"
+                        className="min-h-35"
                         placeholder="Write a short professional bio..."
                         {...field}
                       />

@@ -138,7 +138,7 @@ export default function CreateSubjectPage() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe what this subject covers..."
-                      className="min-h-[120px]"
+                      className="min-h-30"
                       {...field}
                     />
                   </FormControl>
@@ -190,7 +190,9 @@ export default function CreateSubjectPage() {
             />
 
              <div className="flex justify-end gap-3">
-              <Button type="button" variant="outline" onClick={() => navigate("/admin")}>Cancel</Button>
+              <Button type="button" variant="outline" onClick={() => navigate("/admin/subjects")}>
+                Cancel
+              </Button>
               <Button type="submit" disabled={submitting}>
                 {submitting ? "Creating..." : "Create Subject"}
               </Button>

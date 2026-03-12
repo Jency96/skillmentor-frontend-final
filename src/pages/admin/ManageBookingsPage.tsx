@@ -83,8 +83,35 @@ export default function ManageBookingsPage() {
   }, [page, status, sort]);
 
   const handleSearch = async () => {
-    setPage(0);
-    await loadBookings();
+    setLoading(true);
+
+    try {
+      const token = await getToken({ template: "skill-mentor" });
+      if (!token) throw new Error("Not authenticated");
+
+      const data = await getAllBookings(token, {
+        page: 0,
+        size: PAGE_SIZE,
+        search,
+        status,
+        startDate: startDate || undefined,
+        endDate: endDate || undefined,
+        sort,
+      });
+
+      setBookings(data.content);
+      setTotalPages(Math.max(data.totalPages || 1, 1));
+      setPage(0);
+    } catch (error) {
+      toast({
+        title: "Failed to load bookings",
+        description:
+          error instanceof Error ? error.message : "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleConfirmPayment = async (sessionId: number) => {
@@ -146,10 +173,23 @@ export default function ManageBookingsPage() {
   };
 
   const handleSaveMeetingLink = async () => {
+
+    const normalizedMeetingLink = meetingLink.trim();
+
     if (!selectedBookingId || !meetingLink.trim()) {
       toast({
         title: "Meeting link required",
         description: "Please enter a valid meeting link.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // NEW validation
+    if (!/^https?:\/\/.+/.test(normalizedMeetingLink)) {
+      toast({
+        title: "Invalid meeting link",
+        description: "Please enter a valid URL (e.g. https://meet.google.com/...)",
         variant: "destructive",
       });
       return;
@@ -281,7 +321,7 @@ export default function ManageBookingsPage() {
               No bookings found.
             </div>
           ) : (
-            <table className="w-full min-w-[1100px] text-sm">
+            <table className="w-full min-w-275 text-sm">
               <thead>
                 <tr className="border-b text-left">
                   <th className="py-3 pr-4">Session ID</th>
@@ -335,10 +375,7 @@ export default function ManageBookingsPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          disabled={
-                            busyId === booking.id ||
-                            booking.paymentStatus !== "pending"
-                          }
+                          disabled={busyId === booking.id || booking.paymentStatus !== "pending"}
                           onClick={() => handleConfirmPayment(booking.id)}
                         >
                           Confirm Payment
@@ -347,10 +384,7 @@ export default function ManageBookingsPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          disabled={
-                            busyId === booking.id ||
-                            booking.sessionStatus !== "confirmed"
-                          }
+                          disabled={busyId === booking.id || booking.sessionStatus !== "confirmed"}
                           onClick={() => handleMarkComplete(booking.id)}
                         >
                           Mark Complete

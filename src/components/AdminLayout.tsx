@@ -12,11 +12,13 @@ export default function AdminLayout() {
             </div>
         );
     }
-    const role = user?.publicMetadata?.role;
+    const isAdmin =
+    Array.isArray(user?.publicMetadata?.roles) &&
+    user.publicMetadata.roles.includes("ADMIN");
 
-    if (role !== "admin") {
-        return <Navigate to="/dashboard" replace />;
-    }
+  if (!isAdmin) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
     return (
         <div className="container py-8">

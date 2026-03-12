@@ -12,7 +12,9 @@ export function Navigation() {
   const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
 
-  const isAdmin = user?.publicMetadata?.role === "admin";
+  const isAdmin =
+  Array.isArray(user?.publicMetadata?.roles) &&
+  user.publicMetadata.roles.includes("ADMIN");
 
   const NavItems = ({ mobile = false }: { mobile?: boolean }) => (
     <nav

@@ -408,7 +408,7 @@ export default function CreateMentorPage() {
         </CardContent>
       </Card>
 
-      <div className="space-y-4">
+      <div className="space-y-2.5">
         <div>
           <h2 className="text-lg font-semibold">Live Preview</h2>
           <p className="text-sm text-muted-foreground">

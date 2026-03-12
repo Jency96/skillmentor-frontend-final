@@ -45,16 +45,6 @@ export function Navigation() {
         Resources
       </Link>
 
-      {isSignedIn && isAdmin && (
-        <Link
-          to="/admin"
-          className="hover:text-primary transition-colors"
-          onClick={() => mobile && setIsOpen(false)}
-        >
-          Admin
-        </Link>
-      )}
-
     </nav>
   );
 
@@ -135,7 +125,7 @@ export function Navigation() {
   );
 
   return (
-    <header className="sticky top-0 z-50 py-2 text-white w-full bg-black backdrop-blur supports-[backdrop-filter]:bg-black/90">
+    <header className="sticky top-0 z-50 py-2 text-white w-full bg-black backdrop-blur supports-backdrop-filter:bg-black/90">
       <div className="container flex flex-wrap h-14 items-center justify-between">
         <div className="flex items-center">
           <Link to="/" className="flex items-center space-x-2">
@@ -172,7 +162,7 @@ export function Navigation() {
             
             <SheetContent
               side="right"
-              className="w-[300px] bg-black text-white p-6"
+              className="w-75 bg-black text-white p-6"
             >
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between mb-8">

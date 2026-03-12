@@ -24,7 +24,7 @@ export function AdminSidebar() {
                         <NavLink
                             key={item.to}
                             to={item.to}
-                            end={item.to === "/admin"}
+                             end={item.to === "/admin" || item.to === "/admin/subjects" || item.to === "/admin/mentors" || item.to === "/admin/bookings"}
                             className={({ isActive }) =>
                                 cn(
                                     "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-muted",
